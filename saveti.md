@@ -45,9 +45,8 @@ sledeće što treba da uradite jeste da pogledate svoj kod i nađete kojim putem
 Najčešće je t
 
 
-
-
-
-
-
+## Semantička analiza
+### Potrebno predznanje: 
+* Sintetizovani atributi 
+* Tabela simbola
 
