@@ -1,4 +1,7 @@
 # PP1 Projekat
+```diff
+- U IZRADI
+````
 
 Dosta ljudi me je pitalo kako da krene kako da radi projekat iz PP1. Da se ne bih ponavljala i da bi još neko mogao da pročita, ako mu nešto znači, kuckam sada to sve ovde. 
 
