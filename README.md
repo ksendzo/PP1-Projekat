@@ -14,6 +14,7 @@ Razlika u nivoima je prvenstveno u količini koda koju je potrebno iskucati.
 * C nivo ove godine sadrži switch i klasično, klase. 
 
 ## Leksička analiza
+* Pokreće se pomoću lexerGen iz build.xml fajla
 * Kucka se **mjlexer.flex**
 * JFlex alat generiše klasu **Yylex.java**
 * Koristi se pomoćna klasa **sym.java**. Možete da je iskucate sami malo da bi videli kako to radi, ali nema potrebe da kucate nju za sve reči, jer će kasnije alat sintaksne analize to sam generisati.
@@ -28,6 +29,7 @@ pa ako napišete a||b neće protumačiti kao a ili b, nego kao jedan identifikat
 Tako da to promenite. 
 
 ## Sintaksna analiza
+* Pokreće se pomoću compile iz build.xml fajla (svaki put odradi i leksičku analizu, u sulučaju da se nešto naknadno menjalo tamo, da ne bude ju što puca)
 * Kuca se **mjparse.cup** 
 * Ast_cup generiše **MJParser.java** i **sym.java**
 
@@ -46,7 +48,29 @@ Najčešće je t
 
 
 ## Semantička analiza
+* Pokreće se onaj test koji je napisan (java)
+
 ### Potrebno predznanje: 
-* Sintetizovani atributi 
-* Tabela simbola
+* Sintetizovani atributi (vežbe)
+* Tabela simbola (vežbe, primeri su podeljeni po nivoima)
+
+
+
+## Generisanje koda 
+* Svaki put mora da se pokrene java test kako bi se obradile sve 4 faza nad našim mj programom
+* Pokretanjem runObj iz build.xml fajla ispisuje se izgenerisani kod (pregledno da se vidi šta je izgenerisao ili gde je imao neki problem)
+* Pokretanjem Run klase iz mj-runtime.jar ispisuje se kod kroz koji ide program tokom izvršavanja (ako ima neka petlja više puta će prolaziti korz taj kod).
+Run mora imati lokaciju test\program.obj (objekti fajl izgenerisanog koda), a dobra opcija je dodati -debug čime će nakon svake izvršene instrukcije biti ispisan trenutni stek 
+(dobro je da kada vam proradi ono što hoćete proverite da li na kraju svake "linije" koda stek ostaje prazan).
+
+### Potrebno predznanje
+* MJVM (vežbe, primeri su podeljeni po nivoima)
+
+
+
+
+
+
+
+
 
