@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="MJCompiler" default="compile" basedir=".">
+
+	<target name="delete">
+		<delete>
+			<fileset dir="src/rs/ac/bg/etf/pp1">
+				<exclude name="sym_old.java"/>
+				<exclude name="util/Log4JUtils.java"/>
+				<exclude name="Yylex.java"/>
+				<exclude name="RuleVisitor.java"/>
+				<exclude name="SemanticPass.java"/>
+				<exclude name="MyTab.java"/>
+				<exclude name="CodeGenerator.java"/>
+				<exclude name="CounterVisitor.java"/>
+				<exclude name="MyDumpSymbolTableVisitor.java"/>
+				<exclude name="Compiler.java"/>
+			</fileset>
+		</delete>
+		<delete>
+			<fileset dir="spec">
+				<exclude name="mjlexer.flex"/>
+				<exclude name="mjparser.cup"/>
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="lexerGen" depends="delete">
+		<java jar="lib/JFlex.jar" fork="true">
+			<arg value="-d"/>
+			<arg value="./src/rs/ac/bg/etf/pp1"/>
+			<arg value="spec/mjlexer.flex"/>
+		</java>
+	</target>
+
+	<target name="parserGen" depends="lexerGen">
+		<java jar="lib/cup_v10k.jar" fork="true">
+			<arg value="-destdir"/>
+			<arg value="src/rs/ac/bg/etf/pp1"/>
+			<arg value="-ast"/>
+			<arg value="src.rs.ac.bg.etf.pp1.ast"/>
+			<arg value="-parser"/>
+			<arg value="MJParser"/>
+			<arg value="-dump_states"/>
+			<arg value="-buildtree"/>
+			<arg value="spec/mjparser.cup"/>
+		</java>
+	</target>
+
+	<target name="repackage" depends="parserGen">
+		<!-- Replaces all of the references to the old package name in files in the "src" directory -->
+		<replace dir="src" value="rs.ac.bg.etf.pp1.ast" token="src.rs.ac.bg.etf.pp1.ast" summary="true"/>
+	</target>
+
+	<target name="compile" depends="repackage">
+		<javac srcdir="src/rs/ac/bg/etf/pp1" includeantruntime="false">
+			<classpath>
+				<pathelement path="lib/JFlex.jar"/>
+				<pathelement path="lib/cup_v10k.jar"/>
+				<pathelement path="lib/log4j-1.2.17.jar"/>
+				<pathelement path="lib/symboltable.jar"/>
+				<pathelement path="lib/mj-runtime.jar"/>
+			</classpath>
+		</javac>
+	</target>
+	
+	<target name="disasm">
+		<java classname="rs.etf.pp1.mj.runtime.disasm">
+			<arg value="test/program.obj"/>
+			<classpath>
+				<pathelement location="lib/mj-runtime.jar"/>
+			</classpath>
+		</java>
+	</target>
+
+	<target name="runObj" depends="disasm" >
+		<java classname="rs.etf.pp1.mj.runtime.Run">
+			<arg value="test/program.obj"/>
+			<classpath>
+				<pathelement location="lib/mj-runtime.jar"/>
+			</classpath>
+		</java>
+	</target>
+
+</project>
