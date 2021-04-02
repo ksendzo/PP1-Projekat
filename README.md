@@ -5,6 +5,11 @@
 
 Dosta ljudi me je pitalo kako da krene kako da radi projekat iz PP1. Da se ne bih ponavljala i da bi još neko mogao da pročita, ako mu nešto znači, kuckam sada to sve ovde. 
 
+## Faze projekta
+Postoje 4 faze projekta. Svaka naredna se nadovezuje na prethodnu u nekom obliku, ali nije neophodno znati buduće faze za izradu trenutne. 
+Tako da, ako je 
+
+
 ## Nivoi projekta
 Kao što sigurno već znate projekat je moguće uraditi za tri različita nivoa, A, B i C. 
 A je najmanji, C najobimniji. 
