@@ -47,17 +47,17 @@ Sve što dodate odmah testirajte.
 Ako ste zaboravili **;** i znate šta ste poslednje menjali, mnogo ćete lakše naći grešku nego ako ste menjali više linija koda koje su idejno ispravne. 
 Nije dobar feedback u tom pogledu. 
 
-##### Greška zbog konflikta?
+#### Greška zbog konflikta?
 Ako do greške dođe zbog nekog konflikta, alat će vam mnogo fino pokazati gde se desio konflikt. 
 Da biste razumeli šta mu smeta i kako to da popravite, potrebno je da razumete kako radi LALR(1) parser. 
 Ako znate princip LALR(1) i alat vam je rekao gde je došlo do konflikta, 
 sledeće što treba da uradite jeste da pogledate svoj kod i nađete kojim putem kad se ide parser ne zna jednoznačno šta da radi. 
 Najčešće je to problem sa epislon delovima. Npr. A := B | *epsilon*; B := 'x' | *epsilon*; U slučaju da se pojavi prazna sekvenca on neće znati da li da prevede kao A po drugoj smeni ili kao A po prvoj pa B po drugoj. Tj. shift/reduce konflikt. 
 
-##### Kako davati imena klasama unutar zagrada? 
+#### Kako davati imena klasama unutar zagrada? 
 Neterminal sa leve strane se ponaša kao natklasa desnim smenama. Svaka smena ima svoju klasu. Ako postoji samo jedna smena, onda se desna klasa može nazvati isto kao i neterminal. U suprotnom, nijedna klasa smene ne sme imati isto ime kao levi neterminal. Kada budete radili semantičku analizu, shvatićete lepo šta će nam sve to, a za sada samo da znate kako lepo da dajete imena, a da se lepo sve prevede. 
 
-##### Kako razrešiti ternarni operator? 
+#### Kako razrešiti ternarni operator? 
 
 
 
