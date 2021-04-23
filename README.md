@@ -5,8 +5,8 @@
 Razlika u nivoima je prvenstveno u količini koda koju je potrebno iskucati. 
 
 * A nivo - alokacija lokalnih i globalnih promenljivih, nizovi, samo main funkcija, izrazi, dodele, print/read.
-* B nivo - funkcije, if-else, do-while petlja, kao i && i ||.
-* C nivo - klase i switch (ove godine). 
+* B nivo - funkcije, nizovi, if-else, do-while petlja, && i ||, break, continue.
+* C nivo - switch (ove godine), kao i klase i sve što ide sa njima. 
 
 #### Kada i kako izabrati nivo? (A/B/C)
 * Najbolje je u startu izabrati nivo za koji ćete da radite. 
@@ -147,6 +147,8 @@ Ova faza najduže traje, ali se ne sećam da su se javljali neki veći problemi.
 
 <br/><br/><br/>
 *Za bilo koje ispravke/sugestije slobodno se javite. <br/>Ako vam je ovo bilo od koristi, možda bih mogla kasnije i da nađem neke modifikacije i iskomentarišem kako se rade, šta mogu biti problemi.*
+<br/><br/>
+*Ako imate neki problem sa projektom, ili vam je potrebna bilo kakva pomoć, javite se. :)* 
 
 
 
