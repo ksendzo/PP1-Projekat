@@ -32,7 +32,8 @@ Leksička analiza je u projektu mahom odrađena. "Komplikovan" deo koji podrazum
 Tako da uzmete taj kod, dodate još par _reči_ koje je potrebno registrovati i to je to. 
 Samo pazite da vam registracija identifikatora bude na kraju, a ključne reči pre toga, da se ne desi da vam se npr. *if* protumači kao neki naziv promenljive. 
 Takođe, postoji greška baš kod identifikatora. 
-Ispravno je ***([a-z]|[A-Z])[a-zA-Z0-9_]\**** tj. ne stavlja se | unutar [] jer ga tu tretira ako simbol, 
+Ispravno je 
+```([a-z]|[A-Z])[a-zA-Z0-9_]```tj. ne stavlja se | unutar [] jer ga tu tretira ako simbol, 
 pa ako napišete a||b neće protumačiti kao a ili b, nego kao jedan identifikator sa nazivom "a||b". 
 Tako da to promenite. 
 
@@ -52,22 +53,56 @@ Ako do greške dođe zbog nekog konflikta, alat će vam mnogo fino pokazati gde 
 Da biste razumeli šta mu smeta i kako to da popravite, potrebno je da razumete kako radi LALR(1) parser. 
 Ako znate princip LALR(1) i alat vam je rekao gde je došlo do konflikta, 
 sledeće što treba da uradite jeste da pogledate svoj kod i nađete kojim putem kad se ide parser ne zna jednoznačno šta da radi. 
-Najčešće je to problem sa epislon delovima. Npr. A := B | *epsilon*; B := 'x' | *epsilon*; U slučaju da se pojavi prazna sekvenca on neće znati da li da prevede kao A po drugoj smeni ili kao A po prvoj pa B po drugoj. Tj. shift/reduce konflikt. 
+Najčešće je to problem sa epislon delovima. Npr.
+```
+A = B | ε
+B = 'x' | ε
+```
+U slučaju da se pojavi prazna sekvenca on neće znati da li da prevede kao A po drugoj smeni ili kao A po prvoj pa B po drugoj. Tj. shift/reduce konflikt. 
 
 #### Kako davati imena klasama unutar zagrada? 
 Neterminal sa leve strane se ponaša kao natklasa desnim smenama. Svaka smena ima svoju klasu. Ako postoji samo jedna smena, onda se desna klasa može nazvati isto kao i neterminal. U suprotnom, nijedna klasa smene ne sme imati isto ime kao levi neterminal. Kada budete radili semantičku analizu, shvatićete lepo šta će nam sve to, a za sada samo da znate kako lepo da dajete imena, a da se lepo sve prevede. 
 
-#### Kako razrešiti ternarni operator? 
-
+#### Problem ternarnog operatora (2020/2021)?
+Najprostije rečeno, ne znaju se prioriteti. Ako bismo napisali 
+```
+a > b ? x : y 
+``` 
+na osnovu date gramatike parser ne zna koju od ove dve grupacije da iskoristi. 
+```
+(a > b) ? x : y 
+a > (b ? x : y)
+```
+##### Rešenje
+* Condition je većeg prioriteta. Ovako obezbeđujete i ugnježdavanje ternarnih operatora. 
+```
+CondFact    = ExprNonTern [Relop ExprNonTern]
+Expr        = ExprNonTern 
+            | ExprTern
+ExprNonTern = ["-"] Term {Addop Term}
+ExprTern    = Condition "?" Expr ":" Expr
+```
+* Ternarni operator je većeg prioriteta. 
+```
+CondtFact   = Expr [Relop Expr]
+Expr        = ExprNonTern 
+            | ExprTern
+ExprNonTern = ["-"] Term {Addop Term}
+ExprTern    = Condition "?" ExprNonTern ":" ExprNonTern 
+```
 
 
 ### Semantička analiza
-* Pokreće se onaj test koji je napisan (java)
+* Pokreće se java test koji je napisan. Paravi se SemanticAnalyzer koji se izvodi iz VisitorAdapter (data klasa). Za svaki čvor koji hoćete pišete visit metodu. Ovaj fajl će zavisnosti od nivoa biti veliki do ogroman. Metode nisu toliko velike, ali ih ima mnogo. Tako da nema mnogo pomoći. Imajte neki redosled, grupe kako ih dodajete, pišite dobra imena promenljivama kako biste se kasnije lakše snašli šta je šta. 
+* E sada su od koristi one klase što smo pisali u zagradama u sintaksnoj analizi. 
 
 #### Potrebno predznanje: 
 * Sintetizovani atributi (vežbe)
 * Tabela simbola (vežbe, primeri su podeljeni po nivoima)
 
+
+#### Greške
+Jako lako može da se desi da ne "uvežete" sve atribute. 
 
 
 ### Generisanje koda 
