@@ -1,13 +1,12 @@
 # PP1 Projekat
 
 ## Nivoi projekta
-Kao što sigurno već znate projekat je moguće uraditi za tri različita nivoa, A, B i C. 
-A je najmanji, C najobimniji. 
+**A ⊂ B ⊂ C** <br/>
 Razlika u nivoima je prvenstveno u količini koda koju je potrebno iskucati. 
 
-* A nivo je _"go"_. Alokacija lokalnih i globalnih promenljivih, nizovi, samo main funkcija, izrazi, dodele, print/read. I to bi bilo manje-više to. 
-* B nivo je već malo interesantniji. Tu su i druge funkcije, imamo if-else, do-while petlju, kao i && i ||.
-* C nivo ove godine sadrži switch i klasično, klase. 
+* A nivo - alokacija lokalnih i globalnih promenljivih, nizovi, samo main funkcija, izrazi, dodele, print/read.
+* B nivo - funkcije, if-else, do-while petlja, kao i && i ||.
+* C nivo - klase i switch (ove godine). 
 
 #### Kada i kako izabrati nivo? (A/B/C)
 * Najbolje je u startu izabrati nivo za koji ćete da radite. 
@@ -21,7 +20,7 @@ Postoje 4 faze projekta. Svaka naredna se nadovezuje na prethodnu u nekom obliku
 Tako da, fazu po fazu. Nema potrebe da sve shvatite i naučite pre nego što krenete da radite. 
 Takođe, dosta toga ćete i učiti kroz projekat, to i jeste cilj.
 
-### Leksička analiza
+## Leksička analiza
 * Pokreće se pomoću lexerGen iz build.xml fajla
 * Kucka se **mjlexer.flex**
 * JFlex alat generiše klasu **Yylex.java**
@@ -37,7 +36,7 @@ Ispravno je
 pa ako napišete a||b neće protumačiti kao a ili b, nego kao jedan identifikator sa nazivom "a||b". 
 Tako da to promenite. 
 
-### Sintaksna analiza
+## Sintaksna analiza
 * Pokreće se pomoću compile iz build.xml fajla (svaki put odradi i leksičku analizu, u sulučaju da se nešto naknadno menjalo tamo, da ne bude ju što puca)
 * Kuca se **mjparse.cup** 
 * Ast_cup generiše **MJParser.java** i **sym.java**
@@ -48,7 +47,7 @@ Sve što dodate odmah testirajte.
 Ako ste zaboravili **;** i znate šta ste poslednje menjali, mnogo ćete lakše naći grešku nego ako ste menjali više linija koda koje su idejno ispravne. 
 Nije dobar feedback u tom pogledu. 
 
-#### Greška zbog konflikta?
+### Greška zbog konflikta?
 Ako do greške dođe zbog nekog konflikta, alat će vam mnogo fino pokazati gde se desio konflikt. 
 Da biste razumeli šta mu smeta i kako to da popravite, potrebno je da razumete kako radi LALR(1) parser. 
 Ako znate princip LALR(1) i alat vam je rekao gde je došlo do konflikta, 
@@ -60,21 +59,14 @@ B = 'x' | ε
 ```
 U slučaju da se pojavi prazna sekvenca on neće znati da li da prevede kao A po drugoj smeni ili kao A po prvoj pa B po drugoj. Tj. shift/reduce konflikt. 
 
-#### Kako davati imena klasama unutar zagrada? 
-Neterminal sa leve strane se ponaša kao natklasa desnim smenama. Svaka smena ima svoju klasu. Ako postoji samo jedna smena, onda se desna klasa može nazvati isto kao i neterminal. U suprotnom, nijedna klasa smene ne sme imati isto ime kao levi neterminal. Kada budete radili semantičku analizu, shvatićete lepo šta će nam sve to, a za sada samo da znate kako lepo da dajete imena, a da se lepo sve prevede. 
+### Kako davati imena klasama unutar zagrada? 
+O tome šta su ove klase i čemu služe, više u semantičkoj analizi. Za sada je dovoljno da se držite "pravila" ako postoji samo jedna smena, onda se desna klasa može nazvati isto kao i neterminal. U suprotnom, nijedna klasa smene ne sme imati isto ime kao levi neterminal. 
 
-#### Problem ternarnog operatora (2020/2021)?
-Najprostije rečeno, ne znaju se prioriteti. Ako bismo napisali 
-```
-a > b ? x : y 
-``` 
-na osnovu date gramatike parser ne zna koju od ove dve grupacije da iskoristi. 
-```
-(a > b) ? x : y 
-a > (b ? x : y)
-```
-##### Rešenje
-* Condition je većeg prioriteta. Ovako obezbeđujete i ugnježdavanje ternarnih operatora. 
+### Problem ternarnog operatora (2020/2021)?
+Najprostije rečeno, ne znaju se prioriteti. Ako bismo napisali ```a > b ? x : y``` na osnovu date gramatike parser ne zna da li da prevede kao ```(a > b) ? x : y``` ili kao ```(a > (b ? x : y)```
+
+#### Rešenje
+Condition je većeg prioriteta. Ovako obezbeđujete i ugnježdavanje ternarnih operatora. 
 ```
 CondFact    = ExprNonTern [Relop ExprNonTern]
 Expr        = ExprNonTern 
@@ -82,7 +74,7 @@ Expr        = ExprNonTern
 ExprNonTern = ["-"] Term {Addop Term}
 ExprTern    = Condition "?" Expr ":" Expr
 ```
-* Ternarni operator je većeg prioriteta. 
+Ternarni operator je većeg prioriteta. 
 ```
 CondtFact   = Expr [Relop Expr]
 Expr        = ExprNonTern 
@@ -92,28 +84,54 @@ ExprTern    = Condition "?" ExprNonTern ":" ExprNonTern
 ```
 
 
-### Semantička analiza
-* Pokreće se java test koji je napisan. Paravi se SemanticAnalyzer koji se izvodi iz VisitorAdapter (data klasa). Za svaki čvor koji hoćete pišete visit metodu. Ovaj fajl će zavisnosti od nivoa biti veliki do ogroman. Metode nisu toliko velike, ali ih ima mnogo. Tako da nema mnogo pomoći. Imajte neki redosled, grupe kako ih dodajete, pišite dobra imena promenljivama kako biste se kasnije lakše snašli šta je šta. 
-* E sada su od koristi one klase što smo pisali u zagradama u sintaksnoj analizi. 
+## Semantička analiza
+* Pokreće se java test koji je napisan.
+* Paravi se SemanticAnalyzer koji se izvodi iz VisitorAdapter (data klasa). Ovaj fajl će, zavisnosti od nivoa, biti veliki do ogroman. Metode nisu toliko velike, ali ih ima mnogo. Potrudite se da budete uredni, da lepo grupišete metode i dajete fine nazive promenljivama. 
 
-#### Potrebno predznanje: 
+### Potrebno predznanje: 
 * Sintetizovani atributi (vežbe)
 * Tabela simbola (vežbe, primeri su podeljeni po nivoima)
 
+Ponovo, tutorijale gledajte više informativno, a svoj kod je bolje da kucate od nule. Ako smatrate da je neki deo koda njihovog rešenja višak, bolje probajte bez toga. Kasnije ako se ispostavi da vam za nešto drugo ipak treba, tek onda dodajte. 
 
-#### Greške
-Jako lako može da se desi da ne "uvežete" sve atribute. 
+### Klase iz sintaksne analize
+ ```
+ S  = (S1) X a Y
+    | (S2) Z b;
+ ```
+* Naziv neterminala sa leve strane smene je naziv generisane natklase. ```S```
+* Nazivi klasa desne strane smene su izgenerisani kao izvedena klase iz leve. ```S1 i S2```
+* Svaka klasa ima atribute koji su reference na objekte svojih neterminalnih "delova". S1 ima reference na jedan X i jedan Y objekat. S2 ima referencu na Z objekat. 
+* Moguće je dodati još atributa. Obično će vam trebati ili jedan Obj ili jedan Struct objekat. Koji ćete koristiti zavisi od toga šta vam treba. To ostavljam na vama da razmišljate koji vam kada treba. 
+
+### Greške
+Jako lako može da se desi da ne "uvežete" sve atribute. Npr. 
+```
+A = B x    {a.struct = a.b.struct}
+B = C y    {}        // ne generišete ništa, jer u ovom koraku nije potrebno izvršavati nikakve provere
+C = z      {c.struct = new Struct(c.z)}      
+```
+U visit(C) registrujete neku promenljivu/tip i izgenerišete odgovarajući objekat. U A imate sve potrebne elemente da proverite da li se npr. tipovi poklapaju. 
+Međutim kako u visit(B) nije rečeno b.struct = b.c.struct u visit(A) stiže null i program ne radi lepo. Ovo se lako uoči kada se debaguje. 
+<br/> <br/>
+Pazite da ne kucate visit metodu od natklase, jer se ona nikada neće obići (osim ako niko nije izveden iz nje). 
 
 
-### Generisanje koda 
-* Svaki put mora da se pokrene java test kako bi se obradile sve 4 faza nad našim mj programom
-* Pokretanjem runObj iz build.xml fajla ispisuje se izgenerisani kod (pregledno da se vidi šta je izgenerisao ili gde je imao neki problem)
+## Generisanje koda 
+* Pravite CodeGenerator tj. još jedog vizitora, samo što se sada ne bavite tabelom simbola, nego generisanjem koda.
+* Svaki put pokrećete Java test kako bi se obradile sve 4 faza nad našim mj programom.
+* Pokretanjem runObj iz build.xml fajla ispisuje se izgenerisani kod. Pregledno je. 
 * Pokretanjem Run klase iz mj-runtime.jar ispisuje se kod kroz koji ide program tokom izvršavanja (ako ima neka petlja više puta će prolaziti korz taj kod).
-Run mora imati lokaciju test\program.obj (objekti fajl izgenerisanog koda), a dobra opcija je dodati -debug čime će nakon svake izvršene instrukcije biti ispisan trenutni stek 
-(dobro je da kada vam proradi ono što hoćete proverite da li na kraju svake "linije" koda stek ostaje prazan).
+Run mora imati lokaciju ```test\program.obj``` (objekti fajl izgenerisanog koda), a dobra opcija je dodati ```-debug``` čime će nakon svake izvršene instrukcije biti ispisan trenutni stek. Dobra praksa je da kada vam proradi neki deo proverite da stek ostaje prazan nakon svakog logičkog seta instrukcija.
 
-#### Potrebno predznanje
+
+### Potrebno predznanje
 * MJVM (vežbe, primeri su podeljeni po nivoima)
+
+Ova faza najduže traje, ali se ne sećam da su se javljali neki veći problemi. Bitno je da dobro shvatite kako rade instrukcije koje vam trebaju. Kako ih pozivate. Posebno za B i C nivoe, osmislite prvo na papiru kakav ples skokova ćete praviti da biste lepo obradili uslove, kasnije se to lako ukuca. Za C nivo, kada se dođe do pozivanja atributa, metoda, generisanje tabele virtuelnih funkcija, lepo ispratite na vežbama šta se sve i kojim redosledom pakuje na stek i nećete imati nikakvih problema! 
+
+<br/><br/><br/>
+*Za bilo koje ispravke/sugestije slobodno se javite. <br/>Ako vam je ovo bilo od koristi, možda bih mogla kasnije i da nađem neke modifikacije i iskomentarišem kako se rade, šta mogu biti problemi.*
 
 
 
