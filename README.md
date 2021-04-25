@@ -25,7 +25,7 @@ U ovaj repozitorijum sam dodala i build.xml fajl sa svim fazama lepo uvezanim.
 <br/> <br/>
 
 ## Leksička analiza
-* Pokreće se pomoću lexerGen iz build.xml fajla
+* Bildujete **lexerGen** iz build.xml fajla
 * Kucka se **mjlexer.flex**
 * JFlex alat generiše klasu **Yylex.java**
 * Koristi se pomoćna klasa **sym.java**. Možete da je iskucate sami malo da bi videli kako to radi, ali nema potrebe da kucate nju za sve reči, jer će kasnije alat sintaksne analize to sam generisati.
@@ -45,7 +45,7 @@ Tako da to promenite.
 <br/> <br/>
 
 ## Sintaksna analiza
-* Pokreće se pomoću compile iz build.xml fajla (svaki put odradi i leksičku analizu, u sulučaju da se nešto naknadno menjalo tamo, da ne bude ju što puca)
+* Bildujete **compile** iz build.xml fajla (svaki put odradi i leksičku analizu, u sulučaju da se nešto naknadno menjalo tamo, da ne bude ju što puca)
 * Kuca se **mjparse.cup** 
 * Ast_cup generiše **MJParser.java** i **sym.java**
 
@@ -77,7 +77,7 @@ O tome šta su ove klase i čemu služe, više u semantičkoj analizi. Za sada j
 Najprostije rečeno, ne znaju se prioriteti. Ako bismo napisali ```a > b ? x : y``` na osnovu date gramatike parser ne zna da li da prevede kao ```(a > b) ? x : y``` ili kao ```a > (b ? x : y)```
 
 #### Rešenje
-Condition je većeg prioriteta. Ovako obezbeđujete i ugnježdavanje ternarnih operatora. 
+**I način** - Condition je većeg prioriteta. Ovako obezbeđujete i ugnježdavanje ternarnih operatora. 
 ```
 CondFact    = ExprNonTern [Relop ExprNonTern]
 Expr        = ExprNonTern 
@@ -85,7 +85,7 @@ Expr        = ExprNonTern
 ExprNonTern = ["-"] Term {Addop Term}
 ExprTern    = Condition "?" Expr ":" Expr
 ```
-Ternarni operator je većeg prioriteta. 
+**II način** - Ternarni operator je većeg prioriteta. 
 ```
 CondtFact   = Expr [Relop Expr]
 Expr        = ExprNonTern 
