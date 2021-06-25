@@ -129,6 +129,9 @@ U visit(C) registrujete neku promenljivu/tip i izgenerišete odgovarajući objek
 Međutim kako u visit(B) nije rečeno ```b.struct = b.c.struct``` u visit(A) stiže ```null``` i program ne radi lepo. Ovo se lako uoči kada se debaguje. 
 <br/> <br/>
 Pazite da ne kucate visit metodu od natklase, jer se ona nikada neće obići (osim ako niko nije izveden iz nje). 
+<br/>
+#### Metoda getLine() vraća broj kolone umesto broj linije 
+To je bug u alatu. Provereno neće nikome zamerati. Ako ste baš željni, možete da probate da nabudžite da vam se ispisuje broj linije od nekog drugog elementa, ali nema potrebe za tim. Nadam se da niste već izgubili dane tražeći šta je problem. Ali i ako jeste, barem ste naučili šta kako radi u pozadini. 
 
 <br/> 
 
