@@ -1,6 +1,5 @@
 # **PP1 Projekat** - *Saveti i pomoć za izradu projekta iz Programskih prevodioca 1*
 
-## Ukratko 
 Pokušala da izvučem sve što je potrebno za izradu projekta iz PP1. Za svaku fazu možete naći šta je sve potrebno pogledati pre izrade faze (ne morate poznavati sve sa kursa, već samo par konkretnih lekcija), razjašnjenja nekih stvari koje nisu dovoljno pojašnjene u zvaničnim materijalima, kao i neki saveti kako prići samoj izradi. Takođe, tu su i neke greške koje se mogu javiti, zašto se javljaju i kako ih otkloniti.  
 *Srećna rad!*
 
@@ -16,17 +15,17 @@ Razlika u nivoima je prvenstveno u količini koda koju je potrebno iskucati.
 * Najbolje je u startu izabrati nivo za koji ćete da radite. 
 Implementacije će biti skroz drugačije zavisnosti od toga koliko različitih stvari treba da obezbedite da rade. 
 Možete i kasnije da se predomislite da radite za viši, ali u tom slučaju budite spremi da ćete menjati veliki deo već napravljenog koda. 
-* Ako niste u frci sa vremenom i imate dan/dva/tri "viška" uzmite da radite barem za **B** nivo. Za A nivo je dosta stvari odrađeno na tutorijalima. To zvuči primamljivo, ali može se desiti da se kasnije na odbrani ne snađete dovoljno brzo i precizno. Razlog tome nije zato što niste radili sami, nego zato što radeći za A nivo ne provežbate dovoljno neke stvari, posebno skokove. Dok sa druge strane, ako ste napravili lepo uslove i petlje, kakvu god modifikaciju da vam daju, veća je šansa da pre smislite kako nešto da uradite i da to napišete da radi u svakom scenariju. 
-
-<br/> 
+* Ako niste u frci sa vremenom i imate dan/dva/tri "viška" uzmite da radite barem za **B** nivo. Za A nivo je dosta stvari odrađeno na tutorijalima. To zvuči primamljivo, ali može se desiti da se kasnije na odbrani ne snađete dovoljno brzo i precizno. Razlog tome nije zato što niste radili sami, nego zato što radeći za A nivo ne provežbate dovoljno neke stvari, posebno skokove. Dok sa druge strane, ako ste napravili lepo uslove i petlje, kakvu god modifikaciju da vam daju, veća je šansa da pre smislite kako nešto da uradite i da to napišete da radi u svakom scenariju.  
 
 ## Faze projekta
 Postoje 4 faze projekta. Svaka naredna se nadovezuje na prethodnu u nekom obliku, ali nije neophodno znati buduće faze za izradu trenutne. 
 Tako da, fazu po fazu. Nema potrebe da sve shvatite i naučite pre nego što krenete da radite. 
-Takođe, dosta toga ćete i učiti kroz projekat, to i jeste cilj.
-<br/> <br/> 
-U ovaj repozitorijum sam dodala i **build.xml** fajl sa svim fazama lepo uvezanim.
-<br/> <br/>
+Takođe, dosta toga ćete i učiti kroz projekat, to i jeste cilj.  
+
+## Izgled mj programa i traženi zahtevi 
+Zvaničan tekst projekta pročitajte da biste stekli okvirnu ideju čemu projekat. A da biste znali šta konkretno treba da radite postoji jedan drugi dokument - specifikacija mikrojave (2. fajl sa sajta). Već na drugoj strani tog fajla možete videti jedan primer zamišljenog jezika. Na dalje ovaj fajl ćete najviše koristiti da biste znali šta sve treba da radi i kako. 
+
+U ovaj repozitorijum dodala sam i **build.xml** fajl sa svim fazama lepo uvezanim.  
 
 # Leksička analiza
 * Bildujete **lexerGen** iz build.xml fajla
@@ -41,7 +40,7 @@ U ovaj repozitorijum sam dodala i **build.xml** fajl sa svim fazama lepo uvezani
 * Unutar Eclipse šablona sa sajtu neki jar fajlovi su zastareli, pa ili ih zamenite sve u startu sa najnovijim verzijama sa sajta, ili kasnije ako se desi neka greška probajte da se setite da je to možda problem.  
 
 Leksička analiza je mahom odrađena. "Komplikovan" deo koji podrazumeva šta gde treba kucati unutar .flex fajla postoji odrađen unutar tutorijala.
-Tako da uzmite taj kod, dodajte još par _reči_ koje je potrebno registrovati i to je to. 
+Tako da uzmite taj kod, dodajte još par _reči_ koje je potrebno registrovati (nabrojane su u specifikaciji) i to je to. 
 Samo pazite da vam registracija identifikatora bude na kraju, a ključne reči pre toga, da se ne desi da vam se npr. *if* protumači kao neki naziv promenljive. 
 Takođe, postoji greška baš kod identifikatora. 
 Ispravno je 
@@ -88,6 +87,7 @@ int a, b, c;
 }
 ```
 itd. Za svaku sitnicu, napišite primer koji želite da vam radi, izmenite pravila i testirajte. I tako ćete bez stresa razviti svoje rešenje.  
+Specifikaciju držite uz sebe da biste znali šta sve mj program treba da podrži. 
 
 ## Kako davati imena klasama unutar zagrada? 
 O tome šta su ove klase i čemu služe, više u semantičkoj analizi. Za sada je dovoljno da se držite "pravila" - ako postoji samo jedna smena, onda se desna klasa može nazvati isto kao i levi neterminal. U suprotnom, nijedna klasa smene ne sme imati isto ime kao levi neterminal. 
