@@ -1,6 +1,6 @@
-# **PP1 Projekat** - *Saveti i pomoć za izradu projekta iz Programskih prevodioca 1*
+# **PP1 Projekat** - *Saveti i pomoć za izradu projekta iz Programskih prevodilaca 1*
 
-Pokušala da izvučem sve što je potrebno za izradu projekta iz PP1. Za svaku fazu možete naći šta je sve potrebno pogledati pre izrade faze (ne morate poznavati sve sa kursa, već samo par konkretnih lekcija), razjašnjenja nekih stvari koje nisu dovoljno pojašnjene u zvaničnim materijalima, kao i neki saveti kako prići samoj izradi. Takođe, tu su i neke greške koje se mogu javiti, zašto se javljaju i kako ih otkloniti.  
+Zdravo svima! Pokušala sam da izvučem sve što je potrebno za izradu projekta iz PP1. Za svaku fazu možete naći šta je sve neophodno pogledati pre izrade te faze (ne morate poznavati sve sa kursa, već samo par konkretnih lekcija), razjašnjenja nekih stvari koje nisu dovoljno pojašnjene u zvaničnim materijalima, kao i neki saveti kako prići samoj izradi. Takođe, tu su i neke greške koje se mogu javiti, zašto se javljaju i kako ih otkloniti.  
 *Srećna rad!*
 
 ## Nivoi projekta
