@@ -103,6 +103,10 @@ A = B | ε
 B = 'x' | ε
 ```
 U slučaju da se pojavi prazna sekvenca parser neće znati da li da prevede kao A po drugoj smeni ili kao A po prvoj pa B po drugoj. Tj. desiće se shift/reduce konflikt. Ovo se rešava tako što se opredelite za jednu od ove dve epsilon smene. Nešto ovako verovatno nećete svesno napisati, ali vam se može desiti tokom nadograđivanja postojećeg rešenja.  
+
+## Refresh
+Obavezno uradite refresh celog projekta nakon izvršenog build-a. U suprotnom, često ume da javi neke nebulozne greške pri pokretanju programa.
+
 *Ako se setim još nekih grešaka, dodaću ih ovde.*
 
 
