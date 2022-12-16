@@ -37,10 +37,11 @@ U ovaj repozitorijum dodala sam i **build.xml** fajl sa svim fazama lepo uvezani
 ### Potrebno predznanje
 * Manje-više je sve intuitivno.
 * Pogledati tutorijal i podesiti okruženje.
+* Skinuti Eclipse šablon sa sajta predmeta.
 * Unutar Eclipse šablona sa sajtu neki jar fajlovi su zastareli, pa ili ih zamenite sve u startu sa najnovijim verzijama sa sajta, ili kasnije ako se desi neka greška probajte da se setite da je to možda problem.  
 
 Leksička analiza je mahom odrađena. "Komplikovan" deo koji podrazumeva šta gde treba kucati unutar .flex fajla postoji odrađen unutar tutorijala.
-Tako da uzmite taj kod, dodajte još par _reči_ koje je potrebno registrovati (nabrojane su u specifikaciji) i to je to. 
+Tako da uzmite taj kod, dodajte još par _reči_ koje je potrebno registrovati (nabrojane su u specifikaciji mikrojave) i to je to. 
 Samo pazite da vam registracija identifikatora bude na kraju, a ključne reči pre toga, da se ne desi da vam se npr. *if* protumači kao neki naziv promenljive. 
 Takođe, postoji greška baš kod identifikatora. 
 Ispravno je 
